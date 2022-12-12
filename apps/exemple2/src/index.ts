@@ -1,80 +1,31 @@
+type Subscription<T> = (input: T) => void;
+
 class Observer<T> {
-  /**
-   * Observed Value
-   */
-  observed: T
+  private subscriptions: Subscription<T>[] = [];
 
-  /**
-   * Create the Observer
-   * @param observed the initial observed value
-   */
-  constructor(observed: T) {
-    this.observed = observed
+  constructor(_value?: T) {}
+
+  subscribe(subscription: Subscription<T>): number {
+    this.subscriptions = [...this.subscriptions, subscription];
+    return this.subscriptions.length - 1;
   }
 
-  /**
-   * Observe a new value
-   * @param value the new observed value
-   */
+  unsubcribe(subscriptionId: number): void {
+    this.subscriptions = this.subscriptions.filter((subscription, index) => {
+      return index !== subscriptionId;
+    });
+  }
+
   next(value: T) {
-    this.observed = value
-  }
-
-  /**
-   * @returns the current value observed
-   */
-  notify(): T {
-    return this.observed
+    for (const subscription of this.subscriptions) {
+      subscription(value);
+    }
   }
 }
 
-class Subject<Number> {
-  /**
-   * Collection of Observers
-   */
-  observers: Observer<number>[] = []
-
-  /**
-   * Add an observer to the collection
-   * @param observer A class that implement Observer
-   */
-  subscribe(observer: Observer<number>): void {
-    this.observers = [...this.observers, observer]
-  }
-
-  /**
-   * Remove an observer from the collection
-   * @param observer A class that implement Observer
-   */
-  unsubscribe(observer: Observer<number>): void {
-    this.observers = this.observers.filter(
-      (obs) => (JSON.stringify(obs) !== JSON.stringify(observer))
-    )
-  }
-
-  /**
-   * Compute all observed value
-   */
-  compute() {
-    return this.observers.reduce((previousValue, currentObserver) => {
-      return previousValue + currentObserver.notify()
-    }, 0)
-  }
-}
-
-const subject = new Subject()
-const observerA = new Observer(1)
-subject.subscribe(observerA)
-const observerB = new Observer(1)
-subject.subscribe(observerB)
-
-console.log("first computation", subject.compute());
-observerA.next(41)
-console.log("second computation", subject.compute());
-observerA.next(1)
-observerB.next(364)
-console.log("third computation", subject.compute());
-observerA.next(64)
-subject.unsubscribe(observerB)
-console.log("forth computation", subject.compute());
-
+const observed = [1, 2];
+const observer = new Observer(observed);
+observer.subscribe((value) => console.log(value[0] + value[1]));
+observer.next(observed);
+observed[0] = 10;
+observer.next(observed);
