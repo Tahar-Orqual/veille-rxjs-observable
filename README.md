@@ -1,7 +1,10 @@
 # Lexique
 
-***Programmation réactive***: En informatique, la programmation réactive est un paradigme de programmation visant à conserver une cohérence d'ensemble en propageant les modifications d'une source réactive (modification d'une variable, entrée utilisateur, etc.) aux éléments dépendants de cette source.[...] La programmation réactive est née à partir du **patron de conception observateur** [...]
+***Observer Design Patern***: Le patron observateur est un patron de conception en programmation. Il s'agit de l'un des vingt-trois patrons de l'ouvrage du « Gang of Four » Design Patterns – Elements of Reusable Object-Oriented Software1. 
+Il est utilisé pour envoyer un **signal** à des modules qui jouent le rôle d'**observateurs**. En cas de notification, les observateurs effectuent alors l'action adéquate en fonction des informations qui parviennent depuis les modules qu'ils observent (les **observables**).
+![Diagramme UML du patron de conception Observateur](assets/img/Observer.svg.png)
 
+***Programmation réactive***: En informatique, la programmation réactive est un paradigme de programmation visant à conserver une cohérence d'ensemble en propageant les modifications d'une source réactive (modification d'une variable, entrée utilisateur, etc.) aux éléments dépendants de cette source.[...] La programmation réactive est née à partir du **patron de conception observateur** [...]
 
 ```ts
 var b = 1
@@ -23,13 +26,11 @@ b = 10
 console.log(a) // 12
 ```
 
-***Observer Design Patern***: Le patron observateur est un patron de conception de la famille des patrons comportementaux. Il s'agit de l'un des vingt-trois patrons de l'ouvrage du « Gang of Four » Design Patterns – Elements of Reusable Object-Oriented Software1. 
-Il est utilisé pour envoyer un **signal** à des modules qui jouent le rôle d'**observateurs**. En cas de notification, les observateurs effectuent alors l'action adéquate en fonction des informations qui parviennent depuis les modules qu'ils observent (les **observables**).
-
-![Diagramme UML du patron de conception Observateur](assets/img/Observer.svg.png)
 
 ***RxJS***: Reactive Extensions Library for JavaScript
-RxJS is a library for reactive programming using Observables, to make it easier to compose asynchronous or callback-based code. This project is a rewrite of *Reactive-Extensions/RxJS* with better performance, better modularity, better debuggable call stacks, while staying mostly backwards compatible, with some breaking changes that reduce the API surface
+RxJS est une librairie npm qui donne une implémentation de la programation réactive en javascript. Elle inclus de base dans le 
+framework Angular pour gérer des événements asynchrone comme une 
+intéraction utilisateur ou une requête http.
 
 # Design Patern Observer
 ## Exemple 1
@@ -169,7 +170,40 @@ Lorsqu'une variable subit une mise à jour, toutes les autres variables qui en d
 [exemple 3](apps/exemple3/src/index.ts)
 
 # RxJS
-## Demo
+
+## Observables, Subjects et Operators
+
+Un **Observable** est une class capable d'accépter des souscriptions via une methode `subscribe()` qui va être déclanché
+dés que l'observable reçois une nouvelle valeur.
+
+Un **Subject** est une classe qui étends la classe *Observable*
+avec une methode `next()` qui permet de déclancher toutes les 
+souscriptions avec la valeur passer en paramétre.
+
+C'est cette classe que vous serez le plus souvent ammener à
+utiliser avec la methode `toObservable()` pour rendre un
+*Observable* à partir de ce Subject (et donc ne pas exposer la
+methode `next()`)
+
+Il existe d'autre façon de créer un observable comme par exemple 
+`from()` ([documentation](https://rxjs.dev/api/index/function/from))
+
+Un **Operator** est une fonction qui sert à controller le flux 
+d'un *Observable* via l'utilisation de la methode `pipe()`
+
+Les *Operators* les plus souvent rencontré sont `takeUntil()` ([documentation](https://rxjs.dev/api/operators/takeUntil)) et `switchMap()` ([documentation](https://rxjs.dev/api/index/function/switchMap))
+
+## Angular
+
+L'utilisation d'*Observable* est parfois induite de certain
+composant des librairies interne de Angular:
+
+- HttpClient: ([documentation](https://angular.io/api/common/http/HttpClient#request))
+- AsyncPipe: ([documentation](https://angular.io/api/common/AsyncPipe))
+- ActivatedRoute: ([documentation](https://angular.io/api/router/ActivatedRoute))
+
+
+## Démo
 - create a directory in apps
 - copy all the content of exemple3 without the node_modules
 - ```bash 
@@ -189,4 +223,5 @@ Lorsqu'une variable subit une mise à jour, toutes les autres variables qui en d
 - https://fr.wikipedia.org/wiki/Programmation_r%C3%A9active
 - https://www.npmjs.com/package/rxjs
 - https://rxjs.dev/
+- https://angular.io/
 
