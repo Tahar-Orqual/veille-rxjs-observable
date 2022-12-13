@@ -268,7 +268,7 @@ avec une methode `next()` qui permet de déclancher toutes les
 souscriptions avec la valeur passer en paramétre.
 
 C'est cette classe que vous serez le plus souvent ammener à
-utiliser avec la methode `toObservable()` pour rendre un
+utiliser avec la methode `asObservable()` ([documentation](([documentation](https://rxjs.dev/api/index/function/from)))) pour rendre un
 _Observable_ à partir de ce Subject (et donc ne pas exposer la
 methode `next()`)
 
@@ -296,3 +296,4 @@ composant des librairies interne de Angular:
 - https://www.npmjs.com/package/rxjs
 - https://rxjs.dev/
 - https://angular.io/
+- https://www.learnrxjs.io/
