@@ -11,9 +11,9 @@
     - [Propagations automatiques du changement](#propagations-automatiques-du-changement)
   - [Exemple 3](#exemple-3)
 - [RxJS](#rxjs)
+  - [Démo](#démo)
   - [Observables, Subjects et Operators](#observables-subjects-et-operators)
   - [Angular](#angular)
-  - [Démo](#démo)
 - [Source](#source)
 
 # Lexique
@@ -239,14 +239,27 @@ qui en dépendent directement ou indirectement soient à jour._
 [exemple 3](apps/exemple3/src/index.ts)
 
 # RxJS
+## Démo
 
+- créer un dossier dans app
+- copier tout depuis exemple3 (sauf le dossier node_modules)
+- ```bash
+  npm i rxjs
+  ```
+- suprimer le dossier `directive` (src/utils/reactive)
+- aller dans `<app-name>/src/app/utils/list/list.ts`
+- replacer la ligne 10 par:
+  ```ts
+  private listSubject = new Subject<Listable<T>[]>();
+  list$ = this.listSubject.asObservable();
+  ```
 ## Observables, Subjects et Operators
 
-Un **Observable** est une class capable d'accépter des souscriptions via une methode 
+Un **Observable** ([documentation](https://rxjs.dev/guide/observable)) est une class capable d'accépter des souscriptions via une methode 
 `subscribe()` qui va être déclanché
 dés que l'observable reçois une nouvelle valeur.
 
-Un **Subject** est une classe qui étends la classe _Observable_
+Un **Subject** ([documentation](https://rxjs.dev/guide/subject)) est une classe qui étends la classe _Observable_
 avec une methode `next()` qui permet de déclancher toutes les
 souscriptions avec la valeur passer en paramétre.
 
@@ -272,21 +285,6 @@ composant des librairies interne de Angular:
 - HttpClient: ([documentation](https://angular.io/api/common/http/HttpClient#request))
 - AsyncPipe: ([documentation](https://angular.io/api/common/AsyncPipe))
 - ActivatedRoute: ([documentation](https://angular.io/api/router/ActivatedRoute))
-
-## Démo
-
-- créer un dossier dans app
-- copier tout depuis exemple3 (sauf le dossier node_modules)
-- ```bash
-  npm i rxjs
-  ```
-- suprimer le dossier `directive` (src/utils/reactive)
-- aller dans `<app-name>/src/app/utils/list/list.ts`
-- replacer la ligne 10 par:
-  ```ts
-  private listSubject = new Subject<Listable<T>[]>();
-  list$ = this.listSubject.asObservable();
-  ```
 
 # Source
 
