@@ -1,9 +1,9 @@
 type Subscription<T> = (input: T) => void;
 
-class Observer<T> {
+export default class Observer<T> {
   private subscriptions: Subscription<T>[] = [];
 
-  constructor(value?: T) {}
+  constructor(_value?: T) {}
 
   subscribe(subscription: Subscription<T>): number {
     this.subscriptions = [...this.subscriptions, subscription];
@@ -22,10 +22,3 @@ class Observer<T> {
     }
   }
 }
-
-const observed = [1, 2];
-const observer = new Observer(observed);
-observer.subscribe((value) => console.log(value[0] + value[1]));
-observer.next(observed);
-observed[0] = 10;
-observer.next(observed);

@@ -160,10 +160,29 @@ Lorsqu'une variable change de valeur, toutes les variables qui dépendent d'elle
 ### Suivis de dépendances
 Les dépendances entre les variables, directes ou indirectes, doivent être suivies. Si une nouvelle dépendance fait son apparition, alors elle devra être sauvegardée afin de pouvoir propager dans un futur proche, d'éventuelles mises à jour de valeurs.
 
-## Propagations automatiques du changement
+### Propagations automatiques du changement
 Lorsqu'une variable subit une mise à jour, toutes les autres variables qui en dépendent doivent être informées afin qu'elles puissent se mettre à jour.
 
 *La propagation doit se poursuivre automatiquement jusqu'à ce que toutes les variables qui en dépendent directement ou indirectement soient à jour.*
+
+## Exemple 3
+[exemple 3](apps/exemple3/src/index.ts)
+
+# RxJS
+## Demo
+- create a directory in apps
+- copy all the content of exemple3 without the node_modules
+- ```bash 
+  npm i rxjs 
+  ``` 
+- delete the reactive directory (src/utils/reactive)
+- go to `<app-name>/src/app/utils/list/list.ts`
+- replace ligne 10 by:
+  ```ts 
+  private listSubject = new Subject<Listable<T>[]>();
+  list$ = this.listSubject.asObservable();
+  ```
+
 
 # Source
 
