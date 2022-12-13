@@ -241,6 +241,8 @@ qui en dépendent directement ou indirectement soient à jour._
 # RxJS
 ## Démo
 
+[exemple 4](apps/exemple4/src/index.ts)
+
 - créer un dossier dans app
 - copier tout depuis exemple3 (sauf le dossier node_modules)
 - ```bash
@@ -254,6 +256,8 @@ qui en dépendent directement ou indirectement soient à jour._
   list$ = this.listSubject.asObservable();
   ```
 ## Observables, Subjects et Operators
+
+[exemple 5](apps/exemple5/src/index.ts)
 
 Un **Observable** ([documentation](https://rxjs.dev/guide/observable)) est une class capable d'accépter des souscriptions via une methode 
 `subscribe()` qui va être déclanché
