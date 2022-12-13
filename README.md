@@ -1,3 +1,21 @@
+- [Lexique](#lexique)
+- [Design Patern Observer](#design-patern-observer)
+  - [Exemple 1](#exemple-1)
+  - [Limites](#limites)
+- [Programation Réactive](#programation-réactive)
+  - [Example](#example)
+  - [Concepts](#concepts)
+    - [Valeurs qui varient dans le temps](#valeurs-qui-varient-dans-le-temps)
+    - [Flots d'événements](#flots-dévénements)
+    - [Suivis de dépendances](#suivis-de-dépendances)
+    - [Propagations automatiques du changement](#propagations-automatiques-du-changement)
+  - [Exemple 3](#exemple-3)
+- [RxJS](#rxjs)
+  - [Observables, Subjects et Operators](#observables-subjects-et-operators)
+  - [Angular](#angular)
+  - [Démo](#démo)
+- [Source](#source)
+
 # Lexique
 
 ***Observer Design Patern***: Le patron observateur est un patron de conception en programmation. Il s'agit de l'un des vingt-trois patrons de l'ouvrage du « Gang of Four » Design Patterns – Elements of Reusable Object-Oriented Software1. 
@@ -204,14 +222,14 @@ composant des librairies interne de Angular:
 
 
 ## Démo
-- create a directory in apps
-- copy all the content of exemple3 without the node_modules
+- créer un dossier dans app
+- copier tout depuis exemple3 (sauf le dossier node_modules)
 - ```bash 
   npm i rxjs 
   ``` 
-- delete the reactive directory (src/utils/reactive)
-- go to `<app-name>/src/app/utils/list/list.ts`
-- replace ligne 10 by:
+- suprimer le dossier `directive` (src/utils/reactive)
+- aller dans `<app-name>/src/app/utils/list/list.ts`
+- replacer la ligne 10 par:
   ```ts 
   private listSubject = new Subject<Listable<T>[]>();
   list$ = this.listSubject.asObservable();
