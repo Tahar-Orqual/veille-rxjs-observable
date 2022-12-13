@@ -1,4 +1,4 @@
-import List from "../utils/list/list";
+import List from '../utils/list/list';
 
 interface Todo {
   title: string;
